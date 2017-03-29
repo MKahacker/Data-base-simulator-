@@ -1,3 +1,5 @@
+package assignment2;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -9,7 +11,8 @@ public class Assignment2 {
 	public static void main(String[] args){
 		Assignment2 assignment = new Assignment2();
 		assignment.readFromCSVFile("/Users/section11/Documents/workspace/assignment2/bin/assignment2/student.csv", "/Users/section11/Documents/workspace/assignment2/bin/assignment2/takes.csv");
-		assignment.average("total_credits");
+		assignment.join();
+		System.out.println(assignment.average("total_credits"));
 	}
 
 	private void readFromCSVFile(String filename1, String filename2) {
@@ -62,11 +65,20 @@ public class Assignment2 {
         }catch (Exception f){
         	f.printStackTrace();
         }
-      }
-
+	}
+	//Natural Join
+	public void join(){
+		for(Students s : students){
+				for(Takes t: takes){
+					System.out.println(s.getID() + " " + s.getDept_name() + " " + s.getName() + " " + s.getCredits() + " " + t.getCourse_id() + " " + t.getGrade() + " " + t.getID() + " " + t.getSec_id() + " " + t.getSemester() + " " + t.getYear());
+				}
+		}
+	}
+	
+	//Aggregate function based on attribute
 	private int average(String attribute){
 		if (attribute.equals("total_credits")){
-			int avg = students.get(0).getCredits();
+			int avg = 0;
 			for (int i = 0; i < students.size(); i++){
 				avg += students.get(i).getCredits();
 			}
