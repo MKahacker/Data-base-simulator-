@@ -10,10 +10,11 @@ GROUPBY(attribute)
 return(array)
 )
 
-HAVING(condition) %Select rows from Table where condition is true
+HAVING(condition,attribute) %Select rows from Table where condition is true
 (
 ~Loop thru tables and check condition
 ~IF condition is true put in array
+~GROUPBY(attribute)
 return(that array)
 )
 
