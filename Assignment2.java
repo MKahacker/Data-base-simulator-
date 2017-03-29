@@ -3,7 +3,14 @@ package assignment2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Assignment2 {
 	private ArrayList<Students> students;
@@ -12,7 +19,24 @@ public class Assignment2 {
 		Assignment2 assignment = new Assignment2();
 		assignment.readFromCSVFile("/Users/section11/Documents/workspace/assignment2/bin/assignment2/student.csv", "/Users/section11/Documents/workspace/assignment2/bin/assignment2/takes.csv");
 		assignment.join();
-		System.out.println(assignment.average("total_credits"));
+		HashMap<String, List<Students>> groupByResult = assignment.groupBy("depart_name");
+		HashMap<String, Integer> groupByAndAverage = assignment.groupByAndAverage(groupByResult, "total_credits");
+		Random rand = new Random();
+		int randomAverage = rand.nextInt(101);
+		assignment.displayGroupByAndAverage(groupByAndAverage, randomAverage);
+	}
+
+	private void displayGroupByAndAverage(HashMap<String, Integer> groupByAndAverage, int randomAverage) {
+		Set<Entry<String, Integer>> set = groupByAndAverage.entrySet();
+		Iterator<Entry<String, Integer>> iterator = set.iterator();
+		System.out.println("Print all the department names whose total credits is greater than " + randomAverage);
+		while(iterator.hasNext()) {
+			Entry<String, Integer> mentry = iterator.next();
+			if(mentry.getValue() > randomAverage){
+				System.out.println(mentry.getKey() + " " + mentry.getValue());
+			}
+		}
+		
 	}
 
 	private void readFromCSVFile(String filename1, String filename2) {
@@ -75,14 +99,45 @@ public class Assignment2 {
 		}
 	}
 	
+	private HashMap<String, List<Students>> groupBy(String attribute){
+		HashMap<String, List<Students>> hmap = new HashMap<String, List<Students>>();
+		if(attribute.equals("depart_name")){
+			for(Students s: students){
+				if (!hmap.containsKey(s.getDept_name())) {
+				    List<Students> list = new ArrayList<Students>();
+				    list.add(s);
+				    hmap.put(s.getDept_name(), list);
+				} else {
+				    hmap.get(s.getDept_name()).add(s);
+				}
+			}
+			return hmap;
+		}
+		return hmap;
+	}
+	
+	private HashMap<String, Integer> groupByAndAverage(HashMap<String, List<Students>> hmap, String attribute){
+		Set<Entry<String, List<Students>>> set = hmap.entrySet();
+		Iterator<Entry<String, List<Students>>> iterator = set.iterator();
+		HashMap<String, Integer> groupAndAverage = new HashMap<String, Integer>();
+		int avg = 0;
+		while(iterator.hasNext()) {
+			Entry<String, List<Students>> mentry = iterator.next();
+			List<Students> list = (List<Students>) mentry.getValue();
+			avg = average(attribute, list);
+			groupAndAverage.put(mentry.getKey(), avg);
+		}
+		return groupAndAverage;
+	}
+	
 	//Aggregate function based on attribute
-	private int average(String attribute){
+	private int average(String attribute, List<Students> s){
 		if (attribute.equals("total_credits")){
 			int avg = 0;
-			for (int i = 0; i < students.size(); i++){
-				avg += students.get(i).getCredits();
+			for (int i = 0; i < s.size(); i++){
+				avg += s.get(i).getCredits();
 			}
-			int totAvg = avg/students.size();
+			int totAvg = avg/s.size();
 			return totAvg;
 		}else{
 			System.out.println("Choose another attribute.");
