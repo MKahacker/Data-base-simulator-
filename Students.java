@@ -1,3 +1,4 @@
+package assignment2;
 
 public class Students {
 	private int ID; 
@@ -37,7 +38,7 @@ public class Students {
 		return this.total_credits;
 	}
 	
-	public void students(){
+	public Students(){
 		this.ID = 0;
 		this.name = " ";
 		this.dept_name = " ";

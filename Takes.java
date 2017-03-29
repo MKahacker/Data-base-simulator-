@@ -1,3 +1,4 @@
+package assignment2;
 
 public class Takes {
 	
@@ -56,7 +57,7 @@ public class Takes {
 		return this.grade;
 	}
 	
-	public void takes(){
+	public Takes(){
 		this.ID = 0;
 		this.course_id = " ";
 		this.sec_id = 0;
