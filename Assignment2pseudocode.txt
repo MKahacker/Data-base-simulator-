@@ -1,0 +1,24 @@
+IN(condition) %Selecting Table A rows where condition on Table B is true
+(
+~~~~
+return(rows where condition is true)
+)
+
+GROUPBY(attribute)
+(
+~sort rows in table by attribute in an array
+return(array)
+)
+
+HAVING(condition) %Select rows from Table where condition is true
+(
+~Loop thru tables and check condition
+~IF condition is true put in array
+return(that array)
+)
+
+JOIN(TableA, TableB)
+(
+~cartesian product of TableA and TableB in an array
+return(array)
+)
