@@ -4,9 +4,11 @@ IN(condition) %Selecting Table A rows where condition on Table B is true
 return(rows where condition is true)
 )
 
-GROUPBY(attribute)
+GROUPBY(attribute,aggFunc(attr)) %Show all unique attrubute and compute aggFunc on attr
 (
-~sort rows in table by attribute in an array
+~For each UNIQUE attribute in Table
+~~perform aggFunc on the attr
+~~Add UNIQUE attribute and result of aggFunc to array
 return(array)
 )
 
