@@ -19,6 +19,7 @@ public class Assignment2 {
 		Assignment2 assignment = new Assignment2();
 		assignment.readFromCSVFile("/Users/section11/Documents/workspace/assignment2/bin/assignment2/student.csv", "/Users/section11/Documents/workspace/assignment2/bin/assignment2/takes.csv");
 		assignment.join();
+		assignment.antiJoin();
 		HashMap<String, List<Students>> groupByResult = assignment.groupBy("depart_name");
 		HashMap<String, Integer> groupByAndAverage = assignment.groupByAndAverage(groupByResult, "total_credits");
 		Random rand = new Random();
@@ -96,6 +97,17 @@ public class Assignment2 {
 				for(Takes t: takes){
 					System.out.println(s.getID() + " " + s.getDept_name() + " " + s.getName() + " " + s.getCredits() + " " + t.getCourse_id() + " " + t.getGrade() + " " + t.getID() + " " + t.getSec_id() + " " + t.getSemester() + " " + t.getYear());
 				}
+		}
+	}
+	public void antiJoin() //Prints out students that don't correspond to any takes
+	{
+		for(Students s : students)
+		{
+			for(Takes t : takes)
+			{
+				if(s.getID()!=t.getID())
+					System.out.println(s.getID() + ", "+s.getName()+", "+s.getDept_name()+", "+ s.getCredits);
+			}
 		}
 	}
 	
