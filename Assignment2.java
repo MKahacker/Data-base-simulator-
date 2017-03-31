@@ -20,7 +20,7 @@ public class Assignment2 {
 		assignment.readFromCSVFile("/Users/section11/Documents/workspace/assignment2/bin/assignment2/student.csv", "/Users/section11/Documents/workspace/assignment2/bin/assignment2/takes.csv");
 		assignment.join();
 		assignment.antiJoin();
-		assignment,outerJoin();
+		assignment.outerJoin();
 		HashMap<String, List<Students>> groupByResult = assignment.groupBy("depart_name");
 		HashMap<String, Integer> groupByAndAverage = assignment.groupByAndAverage(groupByResult, "total_credits");
 		Random rand = new Random();
@@ -100,32 +100,6 @@ public class Assignment2 {
 				}
 		}
 	}
-	public void antiJoin() //Prints out students that don't correspond to any takes
-	{
-		for(Students s : students)
-		{
-			for(Takes t : takes)
-			{
-				if(s.getID()!=t.getID())
-					System.out.println(s.getID() + ", "+s.getName()+", "+s.getDept_name()+", "+ s.getCredits);
-			}
-		}
-	}
-	public void outerJoin {
-		for(Students s : students)
-		{
-			for(Takes t : takes)
-			{
-				if(t.getID()!=s.getID())
-					System.out.println(t.getCourse_id() + " " + t.getGrade() + " " + t.getID() + " " + t.getSec_id() + " " + t.getSemester() + " " + t.getYear());
-				if(s.getID()!=t.getID())
-					System.out.println(s.getID() + ", "+s.getName()+", "+s.getDept_name()+", "+ s.getCredits);
-				if(s.getID()==t.getID());
-					System.out.println(s.getID() + " " + s.getDept_name() + " " + s.getName() + " " + s.getCredits() + " " + t.getCourse_id() + " " + t.getGrade() + " " + t.getID() + " " + t.getSec_id() + " " + t.getSemester() + " " + t.getYear());
-			}
-		}
-}
-
 	
 	private HashMap<String, List<Students>> groupBy(String attribute){
 		HashMap<String, List<Students>> hmap = new HashMap<String, List<Students>>();
@@ -171,6 +145,56 @@ public class Assignment2 {
 			System.out.println("Choose another attribute.");
 			return -1;
 		}
+	}
+	
+	public void antiJoin() //Prints out students that don't correspond to any takes
+	{
+		for(Students s : students)
+		{
+			for(Takes t : takes)
+			{
+				if(s.getID()!=t.getID())
+					System.out.println(s.getID() + ", "+s.getName()+", "+s.getDept_name()+", "+ s.getCredits());
+			}
+		}
+	}
+	
+	public void outerJoin() {
+		for(Students s : students)
+		{
+			for(Takes t : takes)
+			{
+				if(t.getID()!=s.getID())
+					System.out.println(t.getCourse_id() + " " + t.getGrade() + " " + t.getID() + " " + t.getSec_id() + " " + t.getSemester() + " " + t.getYear());
+				if(s.getID()!=t.getID())
+					System.out.println(s.getID() + ", "+s.getName()+", "+s.getDept_name()+", "+ s.getCredits());
+				if(s.getID()==t.getID());
+					System.out.println(s.getID() + " " + s.getDept_name() + " " + s.getName() + " " + s.getCredits() + " " + t.getCourse_id() + " " + t.getGrade() + " " + t.getID() + " " + t.getSec_id() + " " + t.getSemester() + " " + t.getYear());
+			}
+		}
+}
+	
+	public HashMap<String, List<Students>> IN(HashMap<String, List<Students>> students, HashMap<String, List<Takes>> takes, String attr)
+	{
+		HashMap<String, List<Students>> result = new HashMap<String, List<Students>>();
+		HashMap<String, List<Students>> grouped = groupByAndAverage(students, attr);
+		Iterator<Entry<String, List<Students>>> iterator = set.iterator();
 		
+		for(Students s: grouped)
+		{
+			List<Students> list = new ArrayList<Students>();
+			list.add(s);
+			for(Takes t: takes)
+			{
+				if(!result.containsKey(s.getDept_name()))
+				{
+					if(s.getDept_name()==t.getDept_name())
+					{
+						result.put(s.getDept_name(),list);
+					}
+				}
+			}
+		}
+		return result;
 	}
 }
