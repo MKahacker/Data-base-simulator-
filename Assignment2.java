@@ -20,6 +20,7 @@ public class Assignment2 {
 		assignment.readFromCSVFile("/Users/section11/Documents/workspace/assignment2/bin/assignment2/student.csv", "/Users/section11/Documents/workspace/assignment2/bin/assignment2/takes.csv");
 		assignment.join();
 		assignment.antiJoin();
+		assignment,outerJoin();
 		HashMap<String, List<Students>> groupByResult = assignment.groupBy("depart_name");
 		HashMap<String, Integer> groupByAndAverage = assignment.groupByAndAverage(groupByResult, "total_credits");
 		Random rand = new Random();
