@@ -7,8 +7,8 @@ public class IN2 {
 		
 		for(Students s: grouped)
 		{
-			List<Students> list = new ArrayList<Students>();
-			list.add(s);
+			int avg = 0;
+			avg = average(s.getDept_name());
 			for(Takes t: takes)
 			{
 				if(!result.containsKey(s.getDept_name()))
