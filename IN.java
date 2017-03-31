@@ -1,5 +1,5 @@
 public class IN2 {
-	public HashMap<String, List<Students>> IN(HashMap<String, List<Students>> students, HashMap<String, List<Takes>> takes, String attr, int avg)
+	public HashMap<String, List<Students>> IN(HashMap<String, List<Students>> students, HashMap<String, List<Takes>> takes, String attr)
 	{
 		HashMap<String, List<Students>> result = new HashMap<String, List<Students>>();
 		HasMap<String, List<Students>> grouped = groupByAndAverage(students, attr);
