@@ -110,6 +110,21 @@ public class Assignment2 {
 			}
 		}
 	}
+	public void outerJoin {
+		for(Students s : students)
+		{
+			for(Takes t : takes)
+			{
+				if(t.getID()!=s.getID())
+					System.out.println(t.getCourse_id() + " " + t.getGrade() + " " + t.getID() + " " + t.getSec_id() + " " + t.getSemester() + " " + t.getYear());
+				if(s.getID()!=t.getID())
+					System.out.println(s.getID() + ", "+s.getName()+", "+s.getDept_name()+", "+ s.getCredits);
+				if(s.getID()==t.getID());
+					System.out.println(s.getID() + " " + s.getDept_name() + " " + s.getName() + " " + s.getCredits() + " " + t.getCourse_id() + " " + t.getGrade() + " " + t.getID() + " " + t.getSec_id() + " " + t.getSemester() + " " + t.getYear());
+			}
+		}
+}
+
 	
 	private HashMap<String, List<Students>> groupBy(String attribute){
 		HashMap<String, List<Students>> hmap = new HashMap<String, List<Students>>();
