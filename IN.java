@@ -7,15 +7,14 @@ public class IN2 {
 		
 		for(Students s: grouped)
 		{
-			int avg = 0;
-			avg = average(s.getDept_name());
+			int avg = grouped.getValue();
 			for(Takes t: takes)
 			{
 				if(!result.containsKey(s.getDept_name()))
 				{
 					if(s.getDept_name()==t.getDept_name())
 					{
-						result.put(s.getDept_name(),list);
+						result.put(s.getDept_name(),avg);
 					}
 				}
 			}
