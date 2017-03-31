@@ -1,23 +1,21 @@
-public class IN {
-	public String[][] IN(String[][] t1, String[][] t2, String attr, double avg, boolean gtlt)
+public class IN2 {
+	public HashMap<String, List<Students>> IN(HashMap<String, List<Students>> students, HashMap<String, List<Takes>> takes, String attr, int avg)
 	{
-		String[][] result=new String  [t1.length][t1[0].length];//result will be from table t1
-		String[][] t2group = new String [t2.length][t2[0].length];//group t2 acording to conditions passed
-		//t2group = t2.GROUPBY(attr, avg, gtlt) gtlt=TRUE means >, gtlt=FALSE means <
-		int attCol = 0; //Column that attr is, how to do this????
-		int count = 0; //for counting how many current result rows there are
+		HashMap<String, List<Students>> result = new HashMap<String, List<Students>>();
+		HasMap<String, List<Students>> grouped = groupByAndAverage(students, attr);
+		Iterator<Entry<String, List<Students>>> iterator = set.iterator();
 		
-		//loop thru t2group and IF attr of t2group is IN t1, put row in result
-		for(int i=0; i<t2group.length; i++ ) //t2groups rows
+		for(Students s: grouped)
 		{
-			for(int j=0; j<t1.length; j++) //t1 rows to check against
+			List<Students> list = new ArrayList<Students>();
+			list.add(s);
+			for(Takes t: takes)
 			{
-				if (t2group[i][attCol]==t1[j][attCol]) //if attr of t2group matches to t1 attr
+				if(!result.containsKey(s.getDept_name()))
 				{
-					for(int m=0; m<t1[0].length; m++) //put matching row of t1 in result
+					if(s.getDept_name()==t.getDept_name())
 					{
-						result[count][m]=t1[j][m];
-						count++;
+						result.put(s.getDept_name(),list);
 					}
 				}
 			}
