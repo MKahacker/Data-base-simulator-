@@ -174,9 +174,9 @@ public class Assignment2 {
 		}
 }
 	
-	public HashMap<String, List<Students>> IN(HashMap<String, List<Students>> students, HashMap<String, List<Takes>> takes, String attr)
+	public HashMap<String, Integer> IN(HashMap<String, List<Students>> students, HashMap<String, List<Takes>> takes, String attr)
 	{
-		HashMap<String, List<Students>> result = new HashMap<String, List<Students>>();
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
 		HashMap<String, Integer> grouped = groupByAndAverage(students, attr);
 		Iterator<Entry<String, List<Students>>> iterator = set.iterator();
 		
