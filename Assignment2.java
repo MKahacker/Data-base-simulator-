@@ -189,7 +189,7 @@ public class Assignment2 {
 				{
 					if(s.getDept_name()==t.getDept_name())
 					{
-						result.put(s.getDept_name(),list);
+						result.put(s.getDept_name(),avg);
 					}
 				}
 			}
