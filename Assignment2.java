@@ -177,13 +177,12 @@ public class Assignment2 {
 	public HashMap<String, List<Students>> IN(HashMap<String, List<Students>> students, HashMap<String, List<Takes>> takes, String attr)
 	{
 		HashMap<String, List<Students>> result = new HashMap<String, List<Students>>();
-		HashMap<String, List<Students>> grouped = groupByAndAverage(students, attr);
+		HashMap<String, Integer> grouped = groupByAndAverage(students, attr);
 		Iterator<Entry<String, List<Students>>> iterator = set.iterator();
 		
 		for(Students s: grouped)
 		{
-			List<Students> list = new ArrayList<Students>();
-			list.add(s);
+			int avg = grouped.getValue();
 			for(Takes t: takes)
 			{
 				if(!result.containsKey(s.getDept_name()))
